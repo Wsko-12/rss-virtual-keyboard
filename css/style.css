@@ -21,13 +21,15 @@ h1{
 
 h2,h3{
     font-weight: 400;
-    margin-bottom: 1rem;
+   
 }
 h3{
     font-size: 0.8rem;
+    margin-bottom: 1rem;
 }
 h2{
     font-size: 1.4rem;
+    margin-bottom: 4rem;
 }
 
 
@@ -40,6 +42,7 @@ h2{
 }
 .output{
     margin-bottom: 40px;
+    resize: none;
 }
 .keyboard{
     width: 600px;
