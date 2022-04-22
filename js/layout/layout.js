@@ -11,7 +11,7 @@ export default {
     const info = this.createEl('h2', { content: 'Для переключения языка: левые Ctrl + Alt' });
 
     document.body.append(header, subtitle, info);
-    this.Keyboard = new Keyboard();
+    this.Keyboard = new Keyboard(this.getStorage('lang'));
   },
   createEl(tag, properties) {
     let element;
@@ -47,7 +47,7 @@ export default {
   setStorage(key, value) {
     window.localStorage.setItem(key, JSON.stringify(value));
   },
-  getStorage(key, def = null) {
+  getStorage(key, def = '"en"') {
     return JSON.parse(window.localStorage.getItem(key) || def);
   },
 };

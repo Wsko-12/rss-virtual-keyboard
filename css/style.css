@@ -66,6 +66,23 @@ h2{
     box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
     background: #444444;
     flex: 0 0 auto;
+    color: #ebebeb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px;
+}
+.key__title{
+    font-size: 0.8rem;
+    text-align: center;
+}
+.key__subtitle{
+    color: #ababab;
+    font-size: 0.5rem;
+    text-align: center;
+    align-self: flex-start;
 }
 .keyboard__key:hover{
     box-shadow: inset 2px 2px 3px rgba(0,0,0,0.5);
