@@ -140,6 +140,11 @@ export default [
     shift: '/',
   },
   {
+    code: 'Del',
+    value: 'Del',
+    shift: null,
+  },
+  {
     code: 'CapsLock',
     value: 'CapsLock',
     shift: null,
