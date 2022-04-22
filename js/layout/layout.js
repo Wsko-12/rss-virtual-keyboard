@@ -1,6 +1,13 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-extra-semi */
-const layout = {
+export default {
+  init() {
+    const header = this.createEl('h1', { content: 'RSS Virtual Keyboard' });
+    const subtitle = this.createEl('h3', { content: 'Клавиатура создана в операционной системе Windows' });
+    const info = this.createEl('h2', { content: 'Для переключения языка: левые Ctrl + Alt' });
+
+    document.body.append(header, subtitle, info);
+  },
   createEl(tag, properties) {
     let element;
     try {
@@ -29,5 +36,3 @@ const layout = {
     return JSON.parse(window.localStorage.getItem(key) || def);
   },
 };
-
-export default { layout };
