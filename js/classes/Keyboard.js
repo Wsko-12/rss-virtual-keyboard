@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-assign */
 /* eslint-disable import/no-cycle */
 /* eslint-disable import/extensions */
 import Layout from '../layout/layout.js';
@@ -25,7 +26,7 @@ export default class Keyboard {
       row.forEach((keyCode) => {
         const key = new Key(keyCode, lang);
         this.keys[keyCode] = key;
-        key.Keyboard = this;
+        key.keyboard = this;
         rowEl.append(key.element);
       });
 
@@ -35,10 +36,13 @@ export default class Keyboard {
   }
 
   initListeners() {
+    this.shiftLeft = this.shiftRight = false;
+    this.ctrlLeft = this.ctrlRight = false;
+    this.altLeft = this.altRight = false;
+    this.caps = false;
     document.addEventListener('keydown', (e) => { this.eventCatcher(e); });
     document.addEventListener('keyup', (e) => { this.eventCatcher(e); });
     this.container.addEventListener('mousedown', (e) => { this.eventCatcher(e); });
-    this.container.addEventListener('mouseup', (e) => { this.eventCatcher(e); });
   }
 
   eventCatcher = (e) => {
@@ -55,14 +59,21 @@ export default class Keyboard {
       }
     } else {
       if (e.target === this.container || e.target.dataset.keyboardRow) return;
-
       const keyElement = e.target.closest('.keyboard__key');
       const key = this.keys[keyElement.dataset.code];
-      if (e.type.match(/down/)) {
-        key.click();
-      } else {
-        key.unclick();
-      }
+      key.click();
     }
   };
+
+  switchLang() {
+    console.log('swich lang', this);
+  }
+
+  switchCase() {
+    console.log('change case', this);
+  }
+
+  switchCaps() {
+    console.log('change caps', this);
+  }
 }

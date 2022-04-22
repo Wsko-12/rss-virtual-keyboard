@@ -8,12 +8,12 @@ export default {
   init() {
     const header = this.createEl('h1', { content: 'RSS Virtual Keyboard' });
     const subtitle = this.createEl('h3', { content: 'Клавиатура создана в операционной системе Windows' });
-    const info = this.createEl('h2', { content: 'Для переключения языка: левые Ctrl + Alt' });
+    const info = this.createEl('h2', { content: 'Для переключения языка: <b>левые</b> Ctrl + Alt' });
 
     document.body.append(header, subtitle, info);
     this.Keyboard = new Keyboard(this.getStorage('lang'));
   },
-  createEl(tag, properties) {
+  createEl(tag, properties = {}) {
     let element;
     try {
       element = document.createElement(tag);
