@@ -10,7 +10,6 @@ export default class Key {
     Object.keys(keysData).forEach((language) => {
       this.data[language] = keysData[language].find((keyData) => keyData.code === keyCode);
     });
-
     this.subtitle = Layout.createEl('span', { classes: ['key__subtitle'], content: this.data[lang].shift });
 
     if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
@@ -28,4 +27,9 @@ export default class Key {
     };
     this.element = Layout.createEl('div', properties);
   }
+
+  mouseLeave = () => {
+    this.element.classList.remove('keyboard__key_active');
+    this.element.removeEventListener('mouseleave', this.mouseLeave);
+  };
 }

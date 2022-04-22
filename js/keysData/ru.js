@@ -140,7 +140,7 @@ export default [
     shift: '/',
   },
   {
-    code: 'Del',
+    code: 'Delete',
     value: 'Del',
     shift: null,
   },
