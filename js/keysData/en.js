@@ -1,4 +1,4 @@
-const en = [
+export default [
   {
     code: 'Backquote',
     value: '`',
@@ -315,5 +315,3 @@ const en = [
     shift: null,
   },
 ];
-
-export default { en };
