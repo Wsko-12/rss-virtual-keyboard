@@ -65,4 +65,31 @@ h2{
     border-radius: 3px;
     box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
     background: #444444;
+    flex: 0 0 auto;
+}
+.keyboard__key:hover{
+    box-shadow: inset 2px 2px 3px rgba(0,0,0,0.5);
+    background: #303030;
+}
+
+.keyboard__key[data-code = 'Backspace']{
+    width: 90px;
+}
+.keyboard__key[data-code = 'Tab']{
+    width: 48px;
+}
+.keyboard__key[data-code = 'CapsLock']{
+    width: 70px;
+}
+.keyboard__key[data-code = 'Enter']{
+    width: 95px;
+}
+.keyboard__key[data-code = 'ShiftLeft']{
+    width: 90px;
+}
+.keyboard__key[data-code = 'ShiftRight']{
+    width: 75px;
+}
+.keyboard__key[data-code = 'Space']{
+    width: 253px;
 }
