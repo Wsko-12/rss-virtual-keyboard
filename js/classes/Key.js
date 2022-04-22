@@ -32,4 +32,22 @@ export default class Key {
     this.element.classList.remove('keyboard__key_active');
     this.element.removeEventListener('mouseleave', this.mouseLeave);
   };
+
+  press() {
+    this.element.classList.add('keyboard__key_active');
+  }
+
+  unpress() {
+    this.element.classList.remove('keyboard__key_active');
+  }
+
+  click() {
+    this.element.classList.add('keyboard__key_active');
+    this.element.addEventListener('mouseleave', this.mouseLeave);
+  }
+
+  unclick() {
+    this.element.classList.remove('keyboard__key_active');
+    this.element.removeEventListener('mouseleave', this.mouseLeave);
+  }
 }

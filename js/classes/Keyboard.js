@@ -25,6 +25,7 @@ export default class Keyboard {
       row.forEach((keyCode) => {
         const key = new Key(keyCode, lang);
         this.keys[keyCode] = key;
+        key.Keyboard = this;
         rowEl.append(key.element);
       });
 
@@ -45,11 +46,12 @@ export default class Keyboard {
     e.stopPropagation();
     if (e.type.match(/key/)) {
       const keyCode = e.code;
-      if (!this.keys[keyCode]) return;
+      const key = this.keys[keyCode];
+      if (!key) return;
       if (e.type.match(/down/)) {
-        this.keys[keyCode].element.classList.add('keyboard__key_active');
+        key.press();
       } else {
-        this.keys[keyCode].element.classList.remove('keyboard__key_active');
+        key.unpress();
       }
     } else {
       if (e.target === this.container || e.target.dataset.keyboardRow) return;
@@ -57,10 +59,9 @@ export default class Keyboard {
       const keyElement = e.target.closest('.keyboard__key');
       const key = this.keys[keyElement.dataset.code];
       if (e.type.match(/down/)) {
-        keyElement.classList.add('keyboard__key_active');
-        keyElement.addEventListener('mouseleave', key.mouseLeave);
+        key.click();
       } else {
-        keyElement.classList.remove('keyboard__key_active');
+        key.unclick();
       }
     }
   };
