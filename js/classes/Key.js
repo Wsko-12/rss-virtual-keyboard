@@ -70,6 +70,8 @@ export default class Key {
     }
 
     if (this.code.match(/Caps/)) {
+      if (this.keyboard.capsKeyPressed) return;
+      this.keyboard.capsKeyPressed = true;
       if (!repeat) {
         this.keyboard.caps = !this.keyboard.caps;
         this.keyboard.switchCase();
@@ -78,8 +80,11 @@ export default class Key {
   }
 
   unpress() {
-    if (this.code.match(/Caps/) && this.keyboard.caps) {
-      return;
+    if (this.code.match(/Caps/)) {
+      this.keyboard.capsKeyPressed = false;
+      if (this.keyboard.caps) {
+        return;
+      }
     }
     this.element.classList.remove('keyboard__key_active');
     if (this.code.match(/Control/)) {
