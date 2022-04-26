@@ -105,6 +105,7 @@ export default class Key {
       lang, caps, shiftLeft, shiftRight,
     } = this.keyboard;
     if (this.data[lang].shift) {
+      this.title.innerHTML = this.subtitle.innerHTML = '';
       if (!caps) {
         if (shiftLeft || shiftRight) {
           this.title.innerHTML = this.data[lang].shift;
