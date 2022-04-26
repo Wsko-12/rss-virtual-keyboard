@@ -1,5 +1,5 @@
-import Layout from '../layout/layout';
-import Key from './Key';
+import Layout from '../layout/layout.js';
+import Key from './Key.js';
 
 export default class Keyboard {
   constructor(lang) {
