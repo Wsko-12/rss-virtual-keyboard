@@ -54,14 +54,12 @@ export default class Key {
     }
 
     if (this.code.match(/Shift/)) {
-      if (!this.keyboard.shiftLeft && !this.keyboard.shiftRight) {
-        this.keyboard.switchCase();
-      }
       if (this.code.match(/Left/)) {
         this.keyboard.shiftLeft = true;
       } else {
         this.keyboard.shiftRight = true;
       }
+      this.keyboard.switchCase();
       return;
     }
 
@@ -99,6 +97,27 @@ export default class Key {
         this.keyboard.shiftRight = false;
       }
       this.keyboard.switchCase();
+    }
+  }
+
+  switchCase() {
+    const {
+      lang, caps, shiftLeft, shiftRight,
+    } = this.keyboard;
+    if (!caps) {
+      if (this.data[lang].shift) {
+        if (shiftLeft || shiftRight) {
+          this.title.innerHTML = this.data[lang].shift;
+          if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
+            this.subtitle.innerHTML = this.data[lang].value;
+          }
+        } else {
+          this.title.innerHTML = this.data[lang].value;
+          if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
+            this.subtitle.innerHTML = this.data[lang].shift;
+          }
+        }
+      }
     }
   }
 
