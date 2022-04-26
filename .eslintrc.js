@@ -10,5 +10,10 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'import/no-cycle': [0],
+    'import/extensions': [0],
+    'no-multi-assign': ['error', { ignoreNonDeclaration: true }],
+    'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+  },
 };

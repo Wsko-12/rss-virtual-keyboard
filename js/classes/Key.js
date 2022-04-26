@@ -1,5 +1,3 @@
-/* eslint-disable import/no-cycle */
-/* eslint-disable import/extensions */
 import Layout from '../layout/layout.js';
 import keysData from '../keysData/index.js';
 

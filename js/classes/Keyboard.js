@@ -1,8 +1,5 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable import/no-cycle */
-/* eslint-disable import/extensions */
-import Layout from '../layout/layout.js';
-import Key from './Key.js';
+import Layout from '../layout/layout';
+import Key from './Key';
 
 export default class Keyboard {
   constructor(lang) {

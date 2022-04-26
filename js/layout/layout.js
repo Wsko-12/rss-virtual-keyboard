@@ -1,7 +1,3 @@
-/* eslint-disable import/no-cycle */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-extra-semi */
-// eslint-disable-next-line import/extensions
 import Keyboard from '../classes/Keyboard.js';
 
 export default {
@@ -25,7 +21,7 @@ export default {
 
     if (properties.content) {
       (typeof properties.content === 'string') ? element.innerHTML = properties.content : element.append(...properties.content);
-    };
+    }
 
     if (properties.attrs) {
       Object.keys(properties.attrs).forEach((attr) => {
@@ -33,15 +29,15 @@ export default {
           element.setAttribute(attr, properties.attrs[attr]);
         } else {
           element[attr] = properties.attrs[attr];
-        };
+        }
       });
-    };
+    }
 
     if (properties.dataset) {
       Object.keys(properties.dataset).forEach((key) => {
         element.dataset[key] = properties.dataset[key];
       });
-    };
+    }
     return element;
   },
   setStorage(key, value) {
