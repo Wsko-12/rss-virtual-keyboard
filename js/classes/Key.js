@@ -32,12 +32,14 @@ export default class Key {
     this.element.removeEventListener('mouseup', this.mouseLeave);
   };
 
-  press() {
+  press(repeat) {
     this.element.classList.add('keyboard__key_active');
     if (this.code.match(/Control/)) {
       if (this.code.match(/Left/)) {
         this.keyboard.ctrlLeft = true;
-        if (this.keyboard.altLeft) this.keyboard.switchLang();
+        if (!repeat) {
+          if (this.keyboard.altLeft) this.keyboard.switchLang();
+        }
       } else {
         this.keyboard.ctrlRight = true;
       }
@@ -46,7 +48,9 @@ export default class Key {
     if (this.code.match(/Alt/)) {
       if (this.code.match(/Left/)) {
         this.keyboard.altLeft = true;
-        if (this.keyboard.ctrlLeft) this.keyboard.switchLang();
+        if (!repeat) {
+          if (this.keyboard.ctrlLeft) this.keyboard.switchLang();
+        }
       } else {
         this.keyboard.altRight = true;
       }
@@ -59,13 +63,17 @@ export default class Key {
       } else {
         this.keyboard.shiftRight = true;
       }
-      this.keyboard.switchCase();
+      if (!repeat) {
+        this.keyboard.switchCase();
+      }
       return;
     }
 
     if (this.code.match(/Caps/)) {
-      this.keyboard.caps = !this.keyboard.caps;
-      this.keyboard.switchCase();
+      if (!repeat) {
+        this.keyboard.caps = !this.keyboard.caps;
+        this.keyboard.switchCase();
+      }
     }
   }
 

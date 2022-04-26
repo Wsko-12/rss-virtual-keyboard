@@ -52,7 +52,7 @@ export default class Keyboard {
       const key = this.keys[keyCode];
       if (!key) return;
       if (e.type.match(/down/)) {
-        key.press();
+        key.press(e.repeat);
       } else {
         key.unpress();
       }
