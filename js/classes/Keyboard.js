@@ -12,7 +12,12 @@ export default class Keyboard {
       ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
       ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight'],
     ];
-    this.output = Layout.createEl('textarea', { classes: ['output'], attrs: { rows: 8, cols: 64 } });
+    this.output = Layout.createEl('textarea', {
+      classes: ['output'],
+      attrs: {
+        rows: 8, cols: 64, autofocus: true, spellcheck: false,
+      },
+    });
     this.container = Layout.createEl('div', { classes: ['keyboard'] });
 
     this.wrapper = Layout.createEl('div', { classes: ['wrapper'], content: [this.output, this.container] });

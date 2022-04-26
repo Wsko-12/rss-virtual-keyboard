@@ -24,6 +24,7 @@ export default class Key {
       },
     };
     this.element = Layout.createEl('div', properties);
+    this.currentValue = this.data[lang].value;
   }
 
   mouseLeave = () => {
@@ -76,6 +77,57 @@ export default class Key {
         this.keyboard.caps = !this.keyboard.caps;
         this.keyboard.switchCase();
       }
+      return;
+    }
+    if (this.code.match(/Meta/)) {
+      return;
+    }
+
+    this.print();
+  }
+
+  print() {
+    const { output } = this.keyboard;
+    output.focus();
+    const caretPos = output.selectionStart;
+
+    const textBefore = this.keyboard.output.value.slice(0, caretPos);
+    const textAfter = this.keyboard.output.value.slice(caretPos);
+
+    if (this.currentValue.length === 1 && !this.code.match(/Arrow/)) {
+      this.keyboard.output.value = textBefore + this.currentValue + textAfter;
+      output.selectionStart = output.selectionEnd = caretPos + 1;
+    }
+
+    if (this.code.match(/Arrow/)) {
+      if (this.code.match(/Left/)) {
+        if (output.selectionStart > 0) {
+          output.selectionStart = output.selectionEnd = caretPos - 1;
+        }
+      }
+      if (this.code.match(/Right/)) {
+        output.selectionStart = output.selectionEnd = caretPos + 1;
+      }
+    }
+    if (this.code.match(/Backspace/)) {
+      const textBeforeСorrected = textBefore.slice(0, caretPos - 1);
+      this.keyboard.output.value = textBeforeСorrected + textAfter;
+      if (textBefore.length) {
+        output.selectionStart = output.selectionEnd = caretPos - 1;
+      }
+    }
+    if (this.code.match(/Delete/)) {
+      const textAfterСorrected = textAfter.slice(1);
+      this.keyboard.output.value = textBefore + textAfterСorrected;
+      output.selectionStart = output.selectionEnd = caretPos;
+    }
+    if (this.code.match(/Tab/)) {
+      this.keyboard.output.value = `${textBefore}\t${textAfter}`;
+      output.selectionStart = output.selectionEnd = caretPos + 1;
+    }
+    if (this.code.match(/Enter/)) {
+      this.keyboard.output.value = `${textBefore}\n${textAfter}`;
+      output.selectionStart = output.selectionEnd = caretPos + 1;
     }
   }
 
@@ -121,12 +173,12 @@ export default class Key {
       this.title.innerHTML = this.subtitle.innerHTML = '';
       if (!caps) {
         if (shiftLeft || shiftRight) {
-          this.title.innerHTML = this.data[lang].shift;
+          this.title.innerHTML = this.currentValue = this.data[lang].shift;
           if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
             this.subtitle.innerHTML = this.data[lang].value;
           }
         } else {
-          this.title.innerHTML = this.data[lang].value;
+          this.title.innerHTML = this.currentValue = this.data[lang].value;
           if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
             this.subtitle.innerHTML = this.data[lang].shift;
           }
@@ -135,17 +187,17 @@ export default class Key {
         // eslint-disable-next-line no-lonely-if
         if (shiftLeft || shiftRight) {
           if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
-            this.title.innerHTML = this.data[lang].value;
+            this.title.innerHTML = this.currentValue = this.data[lang].value;
           } else {
-            this.title.innerHTML = this.data[lang].shift;
+            this.title.innerHTML = this.currentValue = this.data[lang].shift;
             this.subtitle.innerHTML = this.data[lang].value;
           }
         } else {
           // eslint-disable-next-line no-lonely-if
           if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
-            this.title.innerHTML = this.data[lang].shift;
+            this.title.innerHTML = this.currentValue = this.data[lang].shift;
           } else {
-            this.title.innerHTML = this.data[lang].value;
+            this.title.innerHTML = this.currentValue = this.data[lang].value;
             this.subtitle.innerHTML = this.data[lang].shift;
           }
         }
