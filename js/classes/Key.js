@@ -65,7 +65,7 @@ export default class Key {
 
     if (this.code.match(/Caps/)) {
       this.keyboard.caps = !this.keyboard.caps;
-      this.keyboard.switchCaps();
+      this.keyboard.switchCase();
     }
   }
 
@@ -104,8 +104,8 @@ export default class Key {
     const {
       lang, caps, shiftLeft, shiftRight,
     } = this.keyboard;
-    if (!caps) {
-      if (this.data[lang].shift) {
+    if (this.data[lang].shift) {
+      if (!caps) {
         if (shiftLeft || shiftRight) {
           this.title.innerHTML = this.data[lang].shift;
           if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
@@ -114,6 +114,24 @@ export default class Key {
         } else {
           this.title.innerHTML = this.data[lang].value;
           if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
+            this.subtitle.innerHTML = this.data[lang].shift;
+          }
+        }
+      } else {
+        // eslint-disable-next-line no-lonely-if
+        if (shiftLeft || shiftRight) {
+          if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
+            this.title.innerHTML = this.data[lang].value;
+          } else {
+            this.title.innerHTML = this.data[lang].shift;
+            this.subtitle.innerHTML = this.data[lang].value;
+          }
+        } else {
+          // eslint-disable-next-line no-lonely-if
+          if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
+            this.title.innerHTML = this.data[lang].shift;
+          } else {
+            this.title.innerHTML = this.data[lang].value;
             this.subtitle.innerHTML = this.data[lang].shift;
           }
         }

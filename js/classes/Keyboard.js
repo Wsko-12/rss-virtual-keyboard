@@ -72,8 +72,4 @@ export default class Keyboard {
       this.keys[keyCode].switchCase();
     });
   }
-
-  switchCaps() {
-    console.log('change caps', this);
-  }
 }
