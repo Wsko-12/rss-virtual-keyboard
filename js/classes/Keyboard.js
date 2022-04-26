@@ -1,5 +1,6 @@
 import Layout from '../layout/layout.js';
 import Key from './Key.js';
+import keysData from '../keysData/index.js';
 
 export default class Keyboard {
   constructor(lang) {
@@ -64,7 +65,13 @@ export default class Keyboard {
   };
 
   switchLang() {
-    console.log('swich lang', this);
+    const languages = Object.keys(keysData);
+    let nextLangIndex = languages.indexOf(this.lang);
+    nextLangIndex = nextLangIndex + 1 >= languages.length ? 0 : nextLangIndex + 1;
+    this.lang = languages[nextLangIndex];
+    Object.keys(this.keys).forEach((keyCode) => {
+      this.keys[keyCode].switchCase();
+    });
   }
 
   switchCase() {
