@@ -100,14 +100,8 @@ export default class Key {
     }
 
     if (this.code.match(/Arrow/)) {
-      if (this.code.match(/Left/)) {
-        if (output.selectionStart > 0) {
-          output.selectionStart = output.selectionEnd = caretPos - 1;
-        }
-      }
-      if (this.code.match(/Right/)) {
-        output.selectionStart = output.selectionEnd = caretPos + 1;
-      }
+      this.keyboard.output.value = textBefore + this.currentValue + textAfter;
+      output.selectionStart = output.selectionEnd = caretPos + 1;
     }
     if (this.code.match(/Backspace/)) {
       const textBeforeСorrected = textBefore.slice(0, caretPos - 1);
