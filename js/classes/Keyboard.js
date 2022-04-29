@@ -75,9 +75,7 @@ export default class Keyboard {
     nextLangIndex = nextLangIndex + 1 >= languages.length ? 0 : nextLangIndex + 1;
     this.lang = languages[nextLangIndex];
     Layout.setStorage('lang', this.lang);
-    Object.keys(this.keys).forEach((keyCode) => {
-      this.keys[keyCode].switchCase();
-    });
+    this.switchCase();
   }
 
   switchCase() {
