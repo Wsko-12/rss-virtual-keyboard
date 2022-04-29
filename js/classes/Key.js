@@ -185,7 +185,6 @@ export default class Key {
           }
         }
       } else {
-        // eslint-disable-next-line no-lonely-if
         if (shiftLeft || shiftRight) {
           if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
             this.title.innerHTML = this.currentValue = this.data[lang].value;
@@ -194,7 +193,6 @@ export default class Key {
             this.subtitle.innerHTML = this.data[lang].value;
           }
         } else {
-          // eslint-disable-next-line no-lonely-if
           if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
             this.title.innerHTML = this.currentValue = this.data[lang].shift;
           } else {
