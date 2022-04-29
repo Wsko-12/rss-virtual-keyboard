@@ -89,39 +89,46 @@ export default class Key {
   print() {
     const { output } = this.keyboard;
     output.focus();
-    const caretPos = output.selectionStart;
+    const caretPosStart = output.selectionStart;
+    const caretPosEnd = output.selectionEnd;
 
-    const textBefore = this.keyboard.output.value.slice(0, caretPos);
-    const textAfter = this.keyboard.output.value.slice(caretPos);
+    const textBefore = this.keyboard.output.value.slice(0, caretPosStart);
+    const textAfter = this.keyboard.output.value.slice(caretPosEnd);
 
-    if (this.currentValue.length === 1 && !this.code.match(/Arrow/)) {
+    if (this.currentValue.length === 1) {
       this.keyboard.output.value = textBefore + this.currentValue + textAfter;
-      output.selectionStart = output.selectionEnd = caretPos + 1;
+      output.selectionStart = output.selectionEnd = caretPosStart + 1;
     }
 
-    if (this.code.match(/Arrow/)) {
-      this.keyboard.output.value = textBefore + this.currentValue + textAfter;
-      output.selectionStart = output.selectionEnd = caretPos + 1;
-    }
     if (this.code.match(/Backspace/)) {
-      const textBeforeСorrected = textBefore.slice(0, caretPos - 1);
-      this.keyboard.output.value = textBeforeСorrected + textAfter;
-      if (textBefore.length) {
-        output.selectionStart = output.selectionEnd = caretPos - 1;
+      if (caretPosStart === caretPosEnd) {
+        const textBeforeСorrected = textBefore.slice(0, caretPosStart - 1);
+        this.keyboard.output.value = textBeforeСorrected + textAfter;
+        if (textBefore.length) {
+          output.selectionStart = output.selectionEnd = caretPosStart - 1;
+        }
+      } else {
+        this.keyboard.output.value = textBefore + textAfter;
+        output.selectionStart = output.selectionEnd = caretPosStart;
       }
     }
     if (this.code.match(/Delete/)) {
-      const textAfterСorrected = textAfter.slice(1);
-      this.keyboard.output.value = textBefore + textAfterСorrected;
-      output.selectionStart = output.selectionEnd = caretPos;
+      if (caretPosStart === caretPosEnd) {
+        const textAfterСorrected = textAfter.slice(1);
+        this.keyboard.output.value = textBefore + textAfterСorrected;
+        output.selectionStart = output.selectionEnd = caretPosStart;
+      } else {
+        this.keyboard.output.value = textBefore + textAfter;
+        output.selectionStart = output.selectionEnd = caretPosStart;
+      }
     }
     if (this.code.match(/Tab/)) {
       this.keyboard.output.value = `${textBefore}\t${textAfter}`;
-      output.selectionStart = output.selectionEnd = caretPos + 1;
+      output.selectionStart = output.selectionEnd = caretPosStart + 1;
     }
     if (this.code.match(/Enter/)) {
       this.keyboard.output.value = `${textBefore}\n${textAfter}`;
-      output.selectionStart = output.selectionEnd = caretPos + 1;
+      output.selectionStart = output.selectionEnd = caretPosStart + 1;
     }
   }
 
