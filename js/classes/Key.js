@@ -97,7 +97,8 @@ export default class Key {
 
     if (this.currentValue.length === 1) {
       this.keyboard.output.value = textBefore + this.currentValue + textAfter;
-      output.selectionStart = output.selectionEnd = caretPosStart + 1;
+      output.selectionStart = caretPosStart + 1;
+      output.selectionEnd = caretPosStart + 1;
     }
 
     if (this.code.match(/Backspace/)) {
@@ -105,30 +106,36 @@ export default class Key {
         const textBeforeСorrected = textBefore.slice(0, caretPosStart - 1);
         this.keyboard.output.value = textBeforeСorrected + textAfter;
         if (textBefore.length) {
-          output.selectionStart = output.selectionEnd = caretPosStart - 1;
+          output.selectionStart = caretPosStart - 1;
+          output.selectionEnd = caretPosStart - 1;
         }
       } else {
         this.keyboard.output.value = textBefore + textAfter;
-        output.selectionStart = output.selectionEnd = caretPosStart;
+        output.selectionStart = caretPosStart;
+        output.selectionEnd = caretPosStart;
       }
     }
     if (this.code.match(/Delete/)) {
       if (caretPosStart === caretPosEnd) {
         const textAfterСorrected = textAfter.slice(1);
         this.keyboard.output.value = textBefore + textAfterСorrected;
-        output.selectionStart = output.selectionEnd = caretPosStart;
+        output.selectionStart = caretPosStart;
+        output.selectionEnd = caretPosStart;
       } else {
         this.keyboard.output.value = textBefore + textAfter;
-        output.selectionStart = output.selectionEnd = caretPosStart;
+        output.selectionStart = caretPosStart;
+        output.selectionEnd = caretPosStart;
       }
     }
     if (this.code.match(/Tab/)) {
       this.keyboard.output.value = `${textBefore}\t${textAfter}`;
-      output.selectionStart = output.selectionEnd = caretPosStart + 1;
+      output.selectionStart = caretPosStart + 1;
+      output.selectionEnd = caretPosStart + 1;
     }
     if (this.code.match(/Enter/)) {
       this.keyboard.output.value = `${textBefore}\n${textAfter}`;
-      output.selectionStart = output.selectionEnd = caretPosStart + 1;
+      output.selectionStart = caretPosStart + 1;
+      output.selectionEnd = caretPosStart + 1;
     }
   }
 
@@ -170,36 +177,40 @@ export default class Key {
     const {
       lang, caps, shiftLeft, shiftRight,
     } = this.keyboard;
-    if (this.data[lang].shift) {
-      this.title.innerHTML = this.subtitle.innerHTML = '';
+    const { shift, value } = this.data[lang];
+    if (shift) {
+      this.title.innerHTML = '';
+      this.subtitle.innerHTML = '';
       if (!caps) {
         if (shiftLeft || shiftRight) {
-          this.title.innerHTML = this.currentValue = this.data[lang].shift;
-          if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
-            this.subtitle.innerHTML = this.data[lang].value;
+          this.title.innerHTML = shift;
+          this.currentValue = shift;
+          if (shift !== value.toUpperCase()) {
+            this.subtitle.innerHTML = value;
           }
         } else {
-          this.title.innerHTML = this.currentValue = this.data[lang].value;
-          if (this.data[lang].shift !== this.data[lang].value.toUpperCase()) {
-            this.subtitle.innerHTML = this.data[lang].shift;
+          this.title.innerHTML = value;
+          this.currentValue = value;
+          if (shift !== value.toUpperCase()) {
+            this.subtitle.innerHTML = shift;
           }
         }
+      } else if (shiftLeft || shiftRight) {
+        if (shift === value.toUpperCase()) {
+          this.title.innerHTML = value;
+          this.currentValue = value;
+        } else {
+          this.title.innerHTML = shift;
+          this.currentValue = shift;
+          this.subtitle.innerHTML = value;
+        }
+      } else if (shift === value.toUpperCase()) {
+        this.title.innerHTML = shift;
+        this.currentValue = shift;
       } else {
-        if (shiftLeft || shiftRight) {
-          if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
-            this.title.innerHTML = this.currentValue = this.data[lang].value;
-          } else {
-            this.title.innerHTML = this.currentValue = this.data[lang].shift;
-            this.subtitle.innerHTML = this.data[lang].value;
-          }
-        } else {
-          if (this.data[lang].shift === this.data[lang].value.toUpperCase()) {
-            this.title.innerHTML = this.currentValue = this.data[lang].shift;
-          } else {
-            this.title.innerHTML = this.currentValue = this.data[lang].value;
-            this.subtitle.innerHTML = this.data[lang].shift;
-          }
-        }
+        this.title.innerHTML = value;
+        this.currentValue = value;
+        this.subtitle.innerHTML = shift;
       }
     }
   }
