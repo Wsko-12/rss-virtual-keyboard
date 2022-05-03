@@ -40,9 +40,12 @@ export default class Keyboard {
   }
 
   initListeners() {
-    this.shiftLeft = this.shiftRight = false;
-    this.ctrlLeft = this.ctrlRight = false;
-    this.altLeft = this.altRight = false;
+    this.shiftLeft = false;
+    this.shiftRight = false;
+    this.ctrlLeft = false;
+    this.ctrlRight = false;
+    this.altLeft = false;
+    this.altRight = false;
     this.caps = false;
     document.addEventListener('keydown', (e) => { this.eventCatcher(e); });
     document.addEventListener('keyup', (e) => { this.eventCatcher(e); });

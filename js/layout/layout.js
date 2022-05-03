@@ -1,14 +1,4 @@
-import Keyboard from '../classes/Keyboard.js';
-
 export default {
-  init() {
-    const header = this.createEl('h1', { content: 'RSS Virtual Keyboard' });
-    const subtitle = this.createEl('h3', { content: 'Клавиатура создана в операционной системе Windows' });
-    const info = this.createEl('h2', { content: 'Для переключения языка: <b>левые</b> Ctrl + Alt' });
-
-    document.body.append(header, subtitle, info);
-    this.Keyboard = new Keyboard(this.getStorage('lang'));
-  },
   createEl(tag, properties = {}) {
     let element;
     try {
@@ -17,10 +7,14 @@ export default {
       throw new Error('No element tag name');
     }
 
-    properties.classes && element.classList.add(...properties.classes);
+    if (properties.classes) element.classList.add(...properties.classes);
 
     if (properties.content) {
-      (typeof properties.content === 'string') ? element.innerHTML = properties.content : element.append(...properties.content);
+      if (typeof properties.content === 'string') {
+        element.innerHTML = properties.content;
+      } else {
+        element.append(...properties.content);
+      }
     }
 
     if (properties.attrs) {
