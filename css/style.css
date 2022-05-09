@@ -78,13 +78,14 @@ h2{
     justify-content: center;
     cursor: pointer;
     padding: 8px;
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
 }
 .keyboard__key_active{
     box-shadow: inset 2px 2px 3px rgba(0,0,0,0.5),0px 0px 0px rgba(0,0,0,0.5);;
     background: #303030;
     font-weight: bold;
     text-shadow: 0 0 5px white;
+    transform: translate(2px,2px);
 }
 .key__title{
     font-size: 0.8rem;
