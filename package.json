@@ -1,0 +1,28 @@
+{
+  "name": "rss-virtual-keyboard",
+  "version": "1.0.0",
+  "description": "RSS Virtual Keyboard Task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint":"eslint ./",
+    "lint:fix":"eslint ./ --fix"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wsko-12/rss-virtual-keyboard.git"
+  },
+  "author": "Vlad Vasko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wsko-12/rss-virtual-keyboard/issues"
+  },
+  "homepage": "https://github.com/Wsko-12/rss-virtual-keyboard#readme",
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
